@@ -9,7 +9,7 @@ IrisShot 是一款面向 Android 横屏游戏的长截图工具，通过屏幕�
 - 支持横向和纵向滚动截图
 - 支持配置截图区域、滑动区域和固定区域
 - 支持 MediaProjection 与 Shizuku 两种捕获方式
-- 支持导出 PNG、JPEG 和 WEBP 图片
+- 支持导出 JPG 和 PNG 图片
 - 支持结果预览、裁剪、重新拼接与分享
 
 ## 系统要求
