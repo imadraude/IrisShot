@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Back up reusable settings, never private screenshots or source frames. -->
+    <include domain="sharedpref" path="game_capture_templates.xml" />
+    <include domain="sharedpref" path="game_long_shot_preferences.xml" />
+</full-backup-content>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup disableIfNoEncryptionCapabilities="true">
+        <include domain="sharedpref" path="game_capture_templates.xml" />
+        <include domain="sharedpref" path="game_long_shot_preferences.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <include domain="sharedpref" path="game_capture_templates.xml" />
+        <include domain="sharedpref" path="game_long_shot_preferences.xml" />
+    </device-transfer>
+</data-extraction-rules>

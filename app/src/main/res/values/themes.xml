@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.GameLongShot" parent="android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowBackground">@color/app_background</item>
+        <item name="android:statusBarColor">@color/app_background</item>
+        <item name="android:navigationBarColor">@color/app_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:colorAccent">@color/app_primary</item>
+        <item name="android:colorControlActivated">@color/app_primary</item>
+        <item name="android:colorControlNormal">@color/app_on_surface_variant</item>
+        <item name="android:colorButtonNormal">@color/app_surface_variant</item>
+        <item name="android:colorBackgroundFloating">@color/app_surface</item>
+        <item name="android:textColorPrimary">@color/app_on_surface</item>
+        <item name="android:textColorSecondary">@color/app_on_surface_variant</item>
+        <item name="android:colorError">@color/app_error</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+</resources>
