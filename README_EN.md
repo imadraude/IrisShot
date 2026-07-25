@@ -9,7 +9,7 @@ IrisShot is a long screenshot tool designed for Android landscape games. It crea
 - Horizontal and vertical scrolling screenshots
 - Configurable capture, swipe, and fixed regions
 - MediaProjection and Shizuku capture modes
-- PNG, JPEG, and WEBP export
+- JPG and PNG export
 - Result preview, cropping, restitching, and sharing
 
 ## Requirements
