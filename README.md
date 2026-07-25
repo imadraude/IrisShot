@@ -1,5 +1,7 @@
 # IrisShot
 
+[简体中文](README.md) | [English](README_EN.md)
+
 IrisShot 是一款面向 Android 横屏游戏的长截图工具，通过屏幕捕获、自动滑动、画面分析与图像拼接生成长截图。
 
 ## 主要功能
@@ -22,9 +24,3 @@ IrisShot 是一款面向 Android 横屏游戏的长截图工具，通过屏幕�
 - JDK 21
 - Android SDK 36.1
 - Gradle 9.4.1
-
-## 应用信息
-
-- 应用名称：Iris长截图
-- 包名：`com.apricotiris.IrisShot`
-- 当前版本：`V1_20260725`
