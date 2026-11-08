@@ -123,6 +123,7 @@
     <string name="settings_about_section">Про застосунок</string>
     <string name="settings_version">Версія</string>
     <string name="settings_github">GitHub</string>
+    <string name="settings_github_repository" translatable="false">https://github.com/imadraude/IrisShot</string>
     <string name="settings_external_link">Зовнішнє посилання</string>
     <string name="settings_open_link">Відкрити</string>
     <string name="settings_reset_cache_dialog">Наявні дані кешу скриншотів буде переміщено до каталогу Android/data застосунку.</string>

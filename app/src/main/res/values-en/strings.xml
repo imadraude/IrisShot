@@ -122,6 +122,7 @@
     <string name="settings_about_section">About</string>
     <string name="settings_version">Version</string>
     <string name="settings_github">Github</string>
+    <string name="settings_github_repository" translatable="false">https://github.com/imadraude/IrisShot</string>
     <string name="settings_external_link">External link</string>
     <string name="settings_open_link">Open</string>
     <string name="settings_reset_cache_dialog">Existing screenshot cache data will be moved to the app Android/data cache directory.</string>
