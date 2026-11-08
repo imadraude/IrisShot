@@ -411,10 +411,15 @@ data class GameCaptureTemplate(
             scrollDirection: ScrollDirection,
         ): RectConfig {
             val capture = captureRegion.normalized()
+            val isPortrait = capture.height > capture.width
             return if (scrollDirection.isVertical) {
-                val inset = (capture.height * 0.12f).roundToInt()
+                val topRatio = if (isPortrait) 0.085f else 0.12f
+                val bottomRatio = if (isPortrait) 0.065f else 0.12f
+                val topInset = (capture.height * topRatio).roundToInt()
                     .coerceAtMost((capture.height - 1) / 2)
-                RectConfig(capture.left, capture.top + inset, capture.right, capture.bottom - inset)
+                val bottomInset = (capture.height * bottomRatio).roundToInt()
+                    .coerceAtMost((capture.height - 1) / 2)
+                RectConfig(capture.left, capture.top + topInset, capture.right, capture.bottom - bottomInset)
             } else {
                 val inset = (capture.width * 0.12f).roundToInt()
                     .coerceAtMost((capture.width - 1) / 2)
@@ -453,6 +458,7 @@ data class GameCaptureTemplate(
             sides: List<FixedSide>,
         ): RectConfig {
             val selected = sides.toSet()
+            val isPortrait = capture.height > capture.width
             val (left, right) = normalizeFixedAxis(
                 captureStart = capture.left,
                 captureEnd = capture.right,
@@ -460,6 +466,8 @@ data class GameCaptureTemplate(
                 requestedEnd = requested.right,
                 leadingFixed = FixedSide.LEFT in selected,
                 trailingFixed = FixedSide.RIGHT in selected,
+                isVerticalAxis = false,
+                isPortrait = isPortrait,
             )
             val (top, bottom) = normalizeFixedAxis(
                 captureStart = capture.top,
@@ -468,6 +476,8 @@ data class GameCaptureTemplate(
                 requestedEnd = requested.bottom,
                 leadingFixed = FixedSide.TOP in selected,
                 trailingFixed = FixedSide.BOTTOM in selected,
+                isVerticalAxis = true,
+                isPortrait = isPortrait,
             )
             return RectConfig(left, top, right, bottom)
         }
@@ -479,31 +489,36 @@ data class GameCaptureTemplate(
             requestedEnd: Int,
             leadingFixed: Boolean,
             trailingFixed: Boolean,
+            isVerticalAxis: Boolean = false,
+            isPortrait: Boolean = false,
         ): Pair<Int, Int> {
             val length = captureEnd - captureStart
             if (length <= 1 || (!leadingFixed && !trailingFixed)) {
                 return captureStart to captureEnd
             }
-            val inset = defaultBandInset(length)
+            val leadingRatio = if (isVerticalAxis && isPortrait) 0.085f else DEFAULT_FIXED_INSET_RATIO
+            val trailingRatio = if (isVerticalAxis && isPortrait) 0.065f else DEFAULT_FIXED_INSET_RATIO
+            val leadingInset = (length * leadingRatio).roundToInt()
+            val trailingInset = (length * trailingRatio).roundToInt()
             return when {
                 leadingFixed && trailingFixed && length >= 3 -> {
                     val requestedLeading = requestedStart.takeIf { it > captureStart }
-                        ?: captureStart + inset
+                        ?: (captureStart + leadingInset)
                     val start = requestedLeading.coerceIn(captureStart + 1, captureEnd - 2)
                     val requestedTrailing = requestedEnd.takeIf { it < captureEnd }
-                        ?: captureEnd - inset
+                        ?: (captureEnd - trailingInset)
                     val end = requestedTrailing.coerceIn(start + 1, captureEnd - 1)
                     start to end
                 }
                 leadingFixed && !trailingFixed -> {
-                    val fallback = captureStart + inset
+                    val fallback = captureStart + leadingInset
                     val start = requestedStart.takeIf { it > captureStart }
                         ?.coerceAtMost(captureEnd - 1)
                         ?: fallback
                     start to captureEnd
                 }
                 !leadingFixed && trailingFixed -> {
-                    val fallback = captureEnd - inset
+                    val fallback = captureEnd - trailingInset
                     val end = requestedEnd.takeIf { it < captureEnd }
                         ?.coerceAtLeast(captureStart + 1)
                         ?: fallback
@@ -957,17 +972,17 @@ data class StitchMatchResult(
 }
 
 object DefaultCaptureConfig {
-    const val WAIT_AFTER_OVERLAY_HIDDEN_MS = 300L
-    const val WAIT_AFTER_GESTURE_MS = 500L
-    const val GESTURE_DURATION_MS = 300L
-    const val GESTURE_STABLE_TIME_MS = 500L
+    const val WAIT_AFTER_OVERLAY_HIDDEN_MS = 150L
+    const val WAIT_AFTER_GESTURE_MS = 200L
+    const val GESTURE_DURATION_MS = 200L
+    const val GESTURE_STABLE_TIME_MS = 200L
     const val POST_GESTURE_WAIT_ENABLED = true
-    const val POST_GESTURE_WAIT_MS = 1_000L
+    const val POST_GESTURE_WAIT_MS = 300L
     const val DEFAULT_GESTURE_DISTANCE_PX = 500
     /** A visible starting path that still leaves enough overlap for reliable stitching. */
     const val DEFAULT_GESTURE_DISTANCE_RATIO = 0.65f
     const val REGION_LEARNING_SAMPLE_COUNT = 8
-    const val REGION_RECOGNITION_DURATION_MS = 6_000L
+    const val REGION_RECOGNITION_DURATION_MS = 3_000L
     const val ANALYSIS_SCALE = 0.5f
     const val BLOCK_SIZE = 32
     // A gesture may travel up to 90% of the scroll region, leaving roughly 10% overlap.

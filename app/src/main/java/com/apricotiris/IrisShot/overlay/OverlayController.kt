@@ -3910,7 +3910,7 @@ class OverlayController(
             metricsWindowManager = metricsWindowManager,
         )
         val panelRight = minOf(
-            dp(if (portrait) 286 else 320) + panelInsets.left,
+            dp(if (portrait) 328 else 350) + panelInsets.left,
             viewport.right.coerceAtLeast(1),
         )
         return Rect(

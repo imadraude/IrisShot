@@ -4531,14 +4531,25 @@ class GameLongShotCaptureService : Service(), OverlayController.Callback {
                 templateRepository.scaleToResolution(source, spec.width, spec.height)
             else -> source
         }
+        val withMigratedDefaults = if (prepared.id == 0L && prepared.gestureStableTimeMs == 500L && prepared.postGestureWaitMs == 1_000L) {
+            prepared.copy(
+                gestureDurationMs = DefaultCaptureConfig.GESTURE_DURATION_MS,
+                gestureStableTimeMs = DefaultCaptureConfig.GESTURE_STABLE_TIME_MS,
+                postGestureWaitMs = DefaultCaptureConfig.POST_GESTURE_WAIT_MS,
+                waitAfterGestureMs = DefaultCaptureConfig.WAIT_AFTER_GESTURE_MS,
+                waitAfterOverlayHiddenMs = DefaultCaptureConfig.WAIT_AFTER_OVERLAY_HIDDEN_MS,
+            )
+        } else {
+            prepared
+        }
         val selectedOrientation = ScreenOrientation.fromSerialized(
             value = null,
-            screenWidth = prepared.screenWidth,
-            screenHeight = prepared.screenHeight,
+            screenWidth = withMigratedDefaults.screenWidth,
+            screenHeight = withMigratedDefaults.screenHeight,
         ).serializedValue
-        return prepared.copy(
-            packageName = prepared.packageName.ifBlank { target.packageName },
-            appName = prepared.appName.ifBlank { target.appName },
+        return withMigratedDefaults.copy(
+            packageName = withMigratedDefaults.packageName.ifBlank { target.packageName },
+            appName = withMigratedDefaults.appName.ifBlank { target.appName },
             orientation = selectedOrientation,
         ).withNormalizedRegions()
     }

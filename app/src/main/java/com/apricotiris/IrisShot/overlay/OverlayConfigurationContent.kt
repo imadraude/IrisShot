@@ -129,12 +129,12 @@ internal fun OverlayConfigurationContent(
     val popupContentAlpha by animateFloatAsState(
         targetValue = if (previewingNonFocusedOpacity) 0f else normalizedPanelOpacity,
         animationSpec = tween(durationMillis = OverlayOpacityFadeDurationMillis),
-        label = "模板菜单透明度",
+        label = "overlay_menu_alpha",
     )
     val nonFocusedDetailsAlpha by animateFloatAsState(
         targetValue = if (previewingNonFocusedOpacity) 0f else 1f,
         animationSpec = tween(durationMillis = OverlayOpacityFadeDurationMillis),
-        label = "非焦点透明度滑条说明",
+        label = "overlay_non_focused_details_alpha",
     )
     val listState = rememberLazyListState(
         initialFirstVisibleItemIndex = initialScrollItemIndex.coerceAtLeast(0),
@@ -289,11 +289,17 @@ internal fun OverlayConfigurationContent(
                             selected = template.scrollDirection == direction,
                             onClick = { onDirectionSelected(direction) },
                             shape = SegmentedButtonDefaults.itemShape(index, ScrollDirection.entries.size),
+                            icon = {},
                             modifier = Modifier
                                 .weight(1f)
                                 .testTag("overlay-direction-${direction.name}"),
                         ) {
-                            Text(direction.shortLabel())
+                            Text(
+                                text = direction.shortLabel(),
+                                maxLines = 1,
+                                softWrap = false,
+                                style = MaterialTheme.typography.labelMedium,
+                            )
                         }
                     }
                 }
@@ -438,7 +444,9 @@ private fun OverlayTemplateSelector(
         ) {
             Text(
                 text = title,
+                style = MaterialTheme.typography.bodyMedium,
                 maxLines = 1,
+                softWrap = false,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.weight(1f),
             )
@@ -728,23 +736,35 @@ private fun OverlayActionRow(
     ) {
         OutlinedButton(
             onClick = onFirstClick,
-            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp),
+            contentPadding = PaddingValues(horizontal = 4.dp, vertical = 0.dp),
             modifier = Modifier
                 .weight(1f)
                 .height(OverlayActionHeight)
                 .testTag(firstTag),
         ) {
-            Text(firstLabel, style = MaterialTheme.typography.labelMedium, maxLines = 1)
+            Text(
+                text = firstLabel,
+                style = MaterialTheme.typography.labelMedium,
+                maxLines = 1,
+                softWrap = false,
+                overflow = TextOverflow.Ellipsis,
+            )
         }
         OutlinedButton(
             onClick = onSecondClick,
-            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp),
+            contentPadding = PaddingValues(horizontal = 4.dp, vertical = 0.dp),
             modifier = Modifier
                 .weight(1f)
                 .height(OverlayActionHeight)
                 .testTag(secondTag),
         ) {
-            Text(secondLabel, style = MaterialTheme.typography.labelMedium, maxLines = 1)
+            Text(
+                text = secondLabel,
+                style = MaterialTheme.typography.labelMedium,
+                maxLines = 1,
+                softWrap = false,
+                overflow = TextOverflow.Ellipsis,
+            )
         }
     }
 }
