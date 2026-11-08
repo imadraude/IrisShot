@@ -16,19 +16,19 @@ enum class AppLanguage(
     val languageTag: String,
     @param:StringRes val labelRes: Int,
 ) {
-    SIMPLIFIED_CHINESE("ZH_CN", "zh-CN", R.string.language_simplified_chinese),
+    UKRAINIAN("UKRAINIAN", "uk", R.string.language_ukrainian),
     ENGLISH("ENGLISH", "en", R.string.language_english),
-    UKRAINIAN("UKRAINIAN", "uk", R.string.language_ukrainian);
+    SIMPLIFIED_CHINESE("ZH_CN", "zh-CN", R.string.language_simplified_chinese);
 
     companion object {
-        val default: AppLanguage = SIMPLIFIED_CHINESE
+        val default: AppLanguage = UKRAINIAN
 
         fun fromLanguageTagOrNull(value: String?): AppLanguage? {
             val normalized = value?.trim()?.lowercase(Locale.ROOT).orEmpty()
             return when {
+                normalized == "uk" || normalized.startsWith("uk-") -> UKRAINIAN
                 normalized == "en" || normalized.startsWith("en-") -> ENGLISH
                 normalized == "zh" || normalized.startsWith("zh-") -> SIMPLIFIED_CHINESE
-                normalized == "uk" || normalized.startsWith("uk-") -> UKRAINIAN
                 else -> null
             }
         }
