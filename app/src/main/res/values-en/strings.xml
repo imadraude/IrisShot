@@ -111,6 +111,7 @@
     <string name="settings_app_language_description">Choose the language used by the app</string>
     <string name="language_simplified_chinese">简体中文</string>
     <string name="language_english">English</string>
+    <string name="language_ukrainian">Українська</string>
     <string name="settings_theme">App theme</string>
     <string name="settings_theme_description">Choose the app interface theme</string>
     <string name="theme_system">Use system setting</string>

@@ -1,6 +1,6 @@
 # IrisShot
 
-[简体中文](README.md) | [English](README_EN.md)
+[简体中文](README.md) | [English](README_EN.md) | [Українська](README_UK.md)
 
 IrisShot is a long screenshot tool designed for Android landscape games. It creates long screenshots through screen capture, automatic scrolling, image analysis, and image stitching.
 

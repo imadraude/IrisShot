@@ -111,6 +111,7 @@
     <string name="settings_app_language_description">切换应用界面使用的语言</string>
     <string name="language_simplified_chinese">简体中文</string>
     <string name="language_english">English</string>
+    <string name="language_ukrainian">Українська</string>
     <string name="settings_theme">应用主题</string>
     <string name="settings_theme_description">切换应用的界面主题样式</string>
     <string name="theme_system">跟随系统</string>

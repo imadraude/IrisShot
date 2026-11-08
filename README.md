@@ -1,6 +1,6 @@
 # IrisShot
 
-[简体中文](README.md) | [English](README_EN.md)
+[简体中文](README.md) | [English](README_EN.md) | [Українська](README_UK.md)
 
 IrisShot 是一款面向 Android 横屏游戏的长截图工具，通过屏幕捕获、自动滑动、画面分析与图像拼接生成长截图。
 

@@ -17,7 +17,8 @@ enum class AppLanguage(
     @param:StringRes val labelRes: Int,
 ) {
     SIMPLIFIED_CHINESE("ZH_CN", "zh-CN", R.string.language_simplified_chinese),
-    ENGLISH("ENGLISH", "en", R.string.language_english);
+    ENGLISH("ENGLISH", "en", R.string.language_english),
+    UKRAINIAN("UKRAINIAN", "uk", R.string.language_ukrainian);
 
     companion object {
         val default: AppLanguage = SIMPLIFIED_CHINESE
@@ -27,6 +28,7 @@ enum class AppLanguage(
             return when {
                 normalized == "en" || normalized.startsWith("en-") -> ENGLISH
                 normalized == "zh" || normalized.startsWith("zh-") -> SIMPLIFIED_CHINESE
+                normalized == "uk" || normalized.startsWith("uk-") -> UKRAINIAN
                 else -> null
             }
         }
@@ -127,7 +129,7 @@ fun Context.localizedMessageOrFallback(
     val selectedLanguage = AppPreferences(this).loadAppLanguage()
     val containsChinese = detail.any { character -> character.code in 0x3400..0x9fff }
     return detail.takeIf {
-        it.isNotEmpty() && (selectedLanguage != AppLanguage.ENGLISH || !containsChinese)
+        it.isNotEmpty() && (selectedLanguage == AppLanguage.SIMPLIFIED_CHINESE || !containsChinese)
     } ?: fallback
 }
 
